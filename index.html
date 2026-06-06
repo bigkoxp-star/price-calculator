@@ -1,93 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>แอปคำนวณราคาสินค้า</title>
- <link rel="manifest" href="manifest.json">
- <style>
-body {
-    background-color: #f4f6f8;
-    color: #2c3e50;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-}
-
-.container {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e1e8ed;
-    width: 350px;
-}
-
-h1 {
-    text-align: center;
-    color: #27ae60;
-    margin-bottom: 25px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #34495e;
-    font-weight: bold;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #bdc3c7;
-    border-radius: 6px;
-    box-sizing: border-box;
-    background-color: #ffffff;
-    color: #2c3e50;
-    margin-bottom: 15px;
-    transition: border-color 0.3s;
-}
-
-.form-group input:focus {
-    border-color: #27ae60;
-    outline: none;
-}
-
-#calculate-btn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    background-color: #2ecc71;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#calculate-btn:hover {
-    background-color: #27ae60;
-}
-
-#result-display {
-    margin-top: 25px;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #2c3e50;
-}
-
- </style>
-</head>
-<body>
-
-<!DOCTYPE html>
-<html lang="th">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>เครื่องคำนวณราคาซูเปอร์มาร์เก็ต</title>
@@ -187,28 +100,35 @@ h1 {
     <div id="result-display"></div>
 </div>
 
-</body>
-</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const calculateBtn = document.getElementById('calculate-btn');
+        const priceInput = document.getElementById('price');
+        const taxInput = document.getElementById('tax');
+        const resultDisplay = document.getElementById('result-display');
 
+        if (calculateBtn) {
+            calculateBtn.addEventListener('click', () => {
+                const price = parseFloat(priceInput.value);
+                const taxRate = parseFloat(taxInput.value);
 
- <script>
-  
-document.getElementById('calculate-btn').addEventListener('click', function() {
-  const price = parseFloat(document.getElementById('price').value);
-  const discount = parseFloat(document.getElementById('discount').value);
+                if (isNaN(price) || price < 0) {
+                    resultDisplay.textContent = "กรุณากรอกราคาให้ถูกต้อง";
+                    return;
+                }
+                if (isNaN(taxRate) || taxRate < 0) {
+                    resultDisplay.textContent = "กรุณากรอกอัตราภาษีให้ถูกต้อง";
+                    return;
+                }
 
-  if (isNaN(price)) {
-    alert('กรุณาใส่ราคาสินค้าให้ถูกต้อง');
-    return;
-  }
+                const taxAmount = (price * taxRate) / 100;
+                const total = price + taxAmount;
 
-  const discountAmount = isNaN(discount) ? 0 : price * (discount / 100);
-  const total = price - discountAmount;
+                resultDisplay.textContent = `ยอดรวมสุทธิ: ${total.toFixed(2)} บาท`;
+            });
+        }
+    });
+</script>
 
-  document.getElementById('total-price').textContent = total.toFixed(2);
-});
-
-navigator.serviceWorker.register
- </script>
 </body>
 </html>
