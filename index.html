@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>แอปคำนวณราคาสินค้า</title>
+ <link rel="manifest" href="manifest.json">
+ <style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.calculator {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 300px;
+}
+h2 {
+  text-align: center;
+  color: #333;
+}
+.input-group {
+  margin-bottom: 15px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+}
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #218838;
+}
+.result {
+  margin-top: 20px;
+  text-align: center;
+}
+นี่ */
+ </style>
+</head>
+<body>
+
+<div class="calculator">
+  <h2>คำนวณราคาสินค้า</h2>
+  <div class="input-group">
+    <label for="price">ราคาสินค้า (บาท):</label>
+    <input type="number" id="price" placeholder="ใส่ราคา">
+  </div>
+  <div class="input-group">
+    <label for="discount">ส่วนลด (%):</label>
+    <input type="number" id="discount" placeholder="ใส่ส่วนลด">
+  </div>
+  <button id="calculate-btn">คำนวณ</button>
+  <div class="result">
+    <h3>ราคาสุทธิ: <span id="total-price">0.00</span> บาท</h3>
+  </div>
+</div>
+ี้ -->
+
+ <script>
+const CACHE_NAME = 'my-pwa-cache-v1';
+const urlsToCache = [
+  '/',
+  '/styles.css',
+  '/script.js',
+  '/index.html'
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        return cache.addAll(urlsToCache);
+      })
+  );
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        return response || fetch(event.request);
+      })
+  );
+});
+navigator.serviceWorker.register
+ </script>
+</body>
+</html>
